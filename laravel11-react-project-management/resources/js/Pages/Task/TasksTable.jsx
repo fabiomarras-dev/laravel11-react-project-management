@@ -5,8 +5,9 @@ import TextInput from "@/Components/TextInput";
 import { Link, router } from "@inertiajs/react";
 import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from "@/constants";
 
-export default function TasksTable({ tasks, queryParams}) {
+export default function TasksTable({ tasks, queryParams = null}) {
 
+    queryParams = queryParams || {};
     const searchFieldChanged = (name, value) => {
         if (value) {
             queryParams[name] = value;

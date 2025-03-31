@@ -4,8 +4,6 @@ import TasksTable from "./TasksTable";
 
 
 export default function index({/*auth,*/ tasks, queryParams = null}) {
-
-    queryParams = queryParams || {};
     
     return (
         <AuthenticatedLayout
