@@ -43,7 +43,7 @@ export default function index({/*auth,*/ projects, queryParams = null}) {
 
     return (
         <AuthenticatedLayout
-            //video: 2:39:30
+            //video: 2:52:40
             //user={auth.user}
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
