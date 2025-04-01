@@ -43,7 +43,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Project/Create');
     }
 
     /**
@@ -51,7 +51,8 @@ class ProjectController extends Controller
      */
     public function store(StoreprojectRequest $request)
     {
-        //
+        $data = $request->validated();
+        dd($data);
     }
 
     /**
