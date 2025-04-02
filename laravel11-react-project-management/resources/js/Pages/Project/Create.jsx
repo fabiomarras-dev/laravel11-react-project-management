@@ -42,14 +42,15 @@ export default function Create({ auth }) {
                             <form onSubmit={onSubmit} action="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
 
                                 <div>
+                                    {/*value={data.image} inside textinput image*/}
                                     <InputLabel htmlFor='project_image_path' value='Project Image' />
-                                    <TextInput id='project_image_path' name='image' type='file' value={data.image} className='mt-1 block w-full' onChange={e => setData('image', e.target.value)} />
+                                    <TextInput id='project_image_path' name='image' type='file' className='mt-1 block w-full' onChange={e => setData('image', e.target.files[0])} />
                                     <InputError message={errors.image} className='mt-2' />
                                 </div>
 
                                 <div className="mt-4">
                                     <InputLabel htmlFor='project_name' value='Project Name' />
-                                    <TextInput id='project_name' name='name' type='text' value={data.name} className='mt-1 block w-full' isFocused={true} onChange={e => setData('name', e.target.value)} />
+                                    <TextInput id='project_name' name='name' type='text' className='mt-1 block w-full' isFocused={true} onChange={e => setData('name', e.target.value)} />
                                     <InputError message={errors.name} className='mt-2' />
                                 </div>
 
