@@ -48,8 +48,6 @@ export default function index({/*auth,*/ users, queryParams = null, success}) {
 
     return (
         <AuthenticatedLayout
-            //video: 4:04:34
-            //user={auth.user}
             header={
                 <div className="flex justify-between items-center">
                     <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">

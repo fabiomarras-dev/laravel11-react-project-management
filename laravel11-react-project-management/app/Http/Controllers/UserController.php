@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCrudResource;
 
 class UserController extends Controller
 {
@@ -32,7 +32,7 @@ class UserController extends Controller
         $users = $query->orderBy($sortField, $sortDirection)->paginate(10)->onEachSide(1);
 
         return inertia('User/Index', [
-            'users' => UserResource::collection($users),
+            'users' => UserCrudResource::collection($users),
             'queryParams' => request()->query() ?: null,
             'success' => session('success'),
         ]);
