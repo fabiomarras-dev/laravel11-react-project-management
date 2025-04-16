@@ -5,7 +5,7 @@ import TextInput from "@/Components/TextInput";
 import { Link, router } from "@inertiajs/react";
 import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from "@/constants";
 
-export default function TasksTable({ tasks, queryParams = null, hideProjectColumn = false }) {
+export default function TasksTable({ tasks, success, queryParams = null, hideProjectColumn = false }) {
 
     queryParams = queryParams || {};
     const searchFieldChanged = (name, value) => {
@@ -48,7 +48,13 @@ export default function TasksTable({ tasks, queryParams = null, hideProjectColum
 
     return (
         <>
-            
+
+            {success && (
+            <div className="bg-emerald-500 py-2 px-4 text-white rounded">
+                {success}
+            </div>
+            )}
+
             <div className="overflow-auto">¨
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
@@ -147,7 +153,7 @@ export default function TasksTable({ tasks, queryParams = null, hideProjectColum
                             {!hideProjectColumn && (
                             <td className="px-3 py-2">{task.project.name}</td>
                             )}
-                            <th className="px-3 py-2 text-white text-nowrap hover:underline">
+                            <th className="px-3 py-2 text-white hover:underline">
                                 <Link href={route('task.show', task.id)}>
                                 {task.name}
                                 </Link>
