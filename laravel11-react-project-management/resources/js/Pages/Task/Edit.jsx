@@ -6,13 +6,16 @@ import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
-export default function Create({ auth, task}) {
+export default function Create({ auth, task, projects, users}) {
     const {data, setData, post, errors, reset} = useForm({
         image: '',
         name: task.name || '',
         status: task.status || '',
         description: task.description || '',
         due_date: task.due_date || '',
+        project_id: task.project_id || '',
+        assigned_user_id: task.assigned_user_id || '',
+        priority: task.priority || '',
         _method: 'PUT',
     });
 
@@ -49,6 +52,20 @@ export default function Create({ auth, task}) {
                                 }
 
                                 <div>
+                                    <InputLabel htmlFor='task_project_id' value='Project' />
+
+                                    <SelectInput value={data.project_id} name="project_id" id="task_project_id" className="mt-1 block w-full" onChange={e => setData("project_id", e.target.value)} >
+                                        <option value="" >Select Project</option>
+                                        {projects.data.map(project => (
+                                            <option value={project.id} key={project.id} >{project.name}</option>
+                                        ))}
+
+                                    </SelectInput>
+
+                                    <InputError message={errors.project_id} className='mt-2' />
+                                </div>
+
+                                <div className="mt-4">
                                     {/*value={data.image} inside textinput image*/}
                                     <InputLabel htmlFor='task_image_path' value='Task Image' />
                                     <TextInput id='task_image_path' name='image' type='file' className='mt-1 block w-full' onChange={e => setData('image', e.target.files[0])} />
@@ -57,7 +74,7 @@ export default function Create({ auth, task}) {
 
                                 <div className="mt-4">
                                     <InputLabel htmlFor='task_name' value='Task Name' />
-                                    <TextInput id='task_name' name='name' type='text' value={data.name} className='mt-1 block w-full' isFocused={true} onChange={e => setData('name', e.target.value)} />
+                                    <TextInput id='task_name' name='name' value={data.name} type='text' className='mt-1 block w-full' isFocused={true} onChange={e => setData('name', e.target.value)} />
                                     <InputError message={errors.name} className='mt-2' />
                                 </div>
 
@@ -76,7 +93,7 @@ export default function Create({ auth, task}) {
                                 <div className="mt-4">
                                     <InputLabel htmlFor='task_status' value='Task Status' />
 
-                                    <SelectInput name="status" id="task_status" className="mt-1 block w-full" onChange={e => setData("status", e.target.value)} >
+                                    <SelectInput value={data.status} name="status" id="task_status" className="mt-1 block w-full" onChange={e => setData("status", e.target.value)} >
                                         <option value="">Select Status</option>
                                         <option value="pending">Pending</option>
                                         <option value="in_progress">In Progress</option>
@@ -85,6 +102,34 @@ export default function Create({ auth, task}) {
                                     </SelectInput>
 
                                     <InputError message={errors.task_status} className='mt-2' />
+                                </div>
+
+                                <div className="mt-4">
+                                    <InputLabel htmlFor='task_priority' value='Task Priority' />
+
+                                    <SelectInput value={data.priority} name="priority" id="task_priority" className="mt-1 block w-full" onChange={e => setData("priority", e.target.value)} >
+                                        <option value="">Select Priority</option>
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+
+                                    </SelectInput>
+
+                                    <InputError message={errors.priority} className='mt-2' />
+                                </div>
+
+                                <div className="mt-4">
+                                    <InputLabel htmlFor='task_assigned_user' value='Assigned User' />
+
+                                    <SelectInput value={data.assigned_user_id} name="assigned_user_id" id="task_assigned_user" className="mt-1 block w-full" onChange={e => setData("assigned_user_id", e.target.value)} >
+                                        <option value="">Select User</option>
+                                        {users.data.map(user => (
+                                            <option value={user.id} key={user.id} >{user.name}</option>
+                                        ))}
+
+                                    </SelectInput>
+
+                                    <InputError message={errors.assigned_user_id} className='mt-2' />
                                 </div>
 
                                 <div className="mt-4 text-right">
