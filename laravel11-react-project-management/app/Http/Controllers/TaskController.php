@@ -144,7 +144,7 @@ class TaskController extends Controller
 
     public function myTasks() 
     {
-        $user = auth()->user;
+        $user = auth()->user();
         $query = Task::query()->where('assigned_user_id', $user->id);
 
 
